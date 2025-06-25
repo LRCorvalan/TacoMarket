@@ -13,7 +13,12 @@ struct BrowesItemsView: View {
     var body: some View {
         VStack {
             ForEach(items, id: \.self) { item in
-                Text(item.rawValue)
+                HStack {
+                    Image(item.rawValue)
+                        .resizable()
+                        .scaledToFit()
+                    Text(item.rawValue)
+                }
             }
         }
     }
