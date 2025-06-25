@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct Account {
+    var email: String
+    var password: String
+    var address: String
+    var orders: [Order] = []
+}
