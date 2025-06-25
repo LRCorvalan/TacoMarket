@@ -14,5 +14,4 @@ struct TacoMarketApp: App {
             ContentView()
         }
     }
-    
 }

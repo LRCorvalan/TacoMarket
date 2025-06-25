@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct BrowesItemsView: View {
+    var items = ItemType.allCases
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            ForEach(items, id: \.self) { item in
+                Text(item.rawValue)
+            }
+        }
     }
 }
 

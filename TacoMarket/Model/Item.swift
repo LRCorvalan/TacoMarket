@@ -8,7 +8,7 @@
 import Foundation
 
 struct Item {
-    var name: String
+    var name: ItemType
     var imageName: String
     var description: String
     var price: Double

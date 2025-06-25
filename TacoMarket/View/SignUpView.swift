@@ -8,11 +8,39 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @State var account: Account
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color.red
+                .opacity(0.4)
+                .ignoresSafeArea()
+            
+            VStack {
+                TextField("Email", text: $account.email)
+                SecureField("Password", text: $account.password)
+                Button {
+                    
+                } label: {
+                    Text("Sign Up")
+                        .padding()
+                        .foregroundStyle(.white)
+                        .font(.title2)
+                        .padding(.horizontal)
+                        .bold()
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundStyle(.blue)
+                        }
+                }
+                .padding(.bottom)
+            }
+            .textFieldStyle(.roundedBorder)
+            .padding()
+        }
     }
 }
 
 #Preview {
-    SignUpView()
+    SignUpView(account: Account(email: "", password: "", address: ""))
 }
