@@ -17,7 +17,7 @@ struct Order {
     var totalPrice: Double {
         var totalPrice: Double = 0
         for item in items {
-            totalPrice += item.price
+            totalPrice += item.type.price
         }
         
         if isDiscountOn {

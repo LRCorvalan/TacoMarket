@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct ItemIndex: View {
+    var item: Item
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink {
+            ItemView(item: item)
+        } label: {
+            HStack(spacing: 40) {
+                Image(item.type.rawValue)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                
+                VStack(alignment: .leading) {
+                    Text(item.type.name)
+                        .font(.title2)
+                    
+                    Text("$\(item.priceView)")
+                }
+                .bold()
+            }
+        }
     }
 }
 
 #Preview {
-    ItemIndex()
+    ItemIndex(item: Item(type: .toiletPaper))
 }

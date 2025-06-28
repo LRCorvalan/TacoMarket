@@ -5,12 +5,20 @@
 //  Created by Luis Corvalan on 6/24/25.
 //
 
-import Foundation
+import SwiftUI
 
 struct Item {
-    var name: ItemType
-    var imageName: String
-    var description: String
-    var price: Double
+    var type: ItemType
     var count: Int
+    
+    init(type: ItemType) {
+        self.type = type
+        self.count = type.count
+    }
+    
+    var priceView: String {
+        String(format: "%.2f", type.price)
+    }
 }
+
+var banana = Item(type: .banana)
