@@ -13,7 +13,7 @@ struct Item {
     
     init(type: ItemType) {
         self.type = type
-        self.count = type.count
+        self.count = type.startCount
     }
     
     var priceView: String {

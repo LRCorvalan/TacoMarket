@@ -60,7 +60,7 @@ enum ItemType: String, CaseIterable {
         }
     }
     
-    var count: Int {
+    var startCount: Int {
         switch self {
         case .banana: return 200
         case .eggs: return 60

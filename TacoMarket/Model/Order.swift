@@ -8,19 +8,19 @@
 import Foundation
 
 struct Order {
-    var discountCode: String
-    var isDiscountOn = false
+    let discountCode = "LetsGoMexico!"
+    var tryDiscountCode = ""
     var items: [Item] = []
     var delivery: Delivery
     var date: Date
     
     var totalPrice: Double {
-        var totalPrice: Double = 0
+        var totalPrice = 0.0
         for item in items {
             totalPrice += item.type.price
         }
         
-        if isDiscountOn {
+        if tryDiscountCode == discountCode {
             totalPrice *= 0.9
         }
         

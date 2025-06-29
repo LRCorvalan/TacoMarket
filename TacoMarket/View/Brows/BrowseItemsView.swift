@@ -11,23 +11,48 @@ struct BrowseItemsView: View {
     private var itemTypes = ItemType.allCases
     @State private var searchText = ""
     
+    enum SearchType: String, CaseIterable {
+        case price, availability
+    }
+    
+    @State private var selectedSearchType: SearchType = .price
+    
     var body: some View {
         List {
-            ForEach(serachResults, id: \.self) { itemType in
+            ForEach(searchResults, id: \.self) { itemType in
                 ItemIndex(item: Item(type: itemType))
             }
         }
         .searchable(text: $searchText)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Picker("asdf", selection: $selectedSearchType) {
+                    ForEach(SearchType.allCases, id: \.self) {
+                        Text($0.rawValue.capitalized)
+                    }
+                }
+                .pickerStyle(.palette)
+            }
+        }
     }
     
-    var serachResults: [ItemType] {
+    var searchResults: [ItemType] {
+        let sortedItems: [ItemType] = {
+            switch selectedSearchType {
+            case .availability:
+                return itemTypes.sorted { $0.startCount > $1.startCount }
+            case .price:
+                return itemTypes.sorted { $0.price < $1.price }
+            }
+        }()
+
         if searchText.isEmpty {
-            return ItemType.allCases
+            return sortedItems
         } else {
-            var foundItems: [ItemType] = []
-            foundItems += itemTypes.filter { $0.rawValue.capitalized.contains(searchText) }
-            foundItems += itemTypes.filter { $0.description.contains(searchText) }
-            return foundItems
+            return sortedItems.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText) ||
+                $0.description.localizedCaseInsensitiveContains(searchText)
+            }
         }
     }
 }
