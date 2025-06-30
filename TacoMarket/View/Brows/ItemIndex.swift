@@ -23,8 +23,8 @@ struct ItemIndex: View {
                 VStack(alignment: .leading) {
                     Text(item.type.name)
                         .font(.title2)
-                    
                     Text("$\(item.priceView)")
+                    Text("\(item.count) Available")
                 }
                 .bold()
             }
@@ -33,5 +33,7 @@ struct ItemIndex: View {
 }
 
 #Preview {
-    ItemIndex(item: .constant(banana))
+    NavigationStack {
+        ItemIndex(item: .constant(banana))
+    }
 }

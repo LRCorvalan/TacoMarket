@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BackgroundColor: View {
     var body: some View {
-        LinearGradient(colors: [.black, .green], startPoint: .top, endPoint: .bottom)
+        LinearGradient(colors: [.gray, .yellow], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
             .opacity(0.4)
     }

@@ -41,8 +41,10 @@ struct LoginSignupView: View {
                 Button {
                     if isSigningUp {
                         print("Signing up…")
+                        // MARK: - Create account
                     } else {
                         print("Logging in…")
+                        // MARK: - login
                     }
                 } label: {
                     RoundedRectangle(cornerRadius: 30)
@@ -60,9 +62,6 @@ struct LoginSignupView: View {
             }
             .textFieldStyle(.roundedBorder)
             .padding()
-            .onChange(of: isSigningUp, { oldValue, newValue in
-                withAnimation(.easeInOut) { }
-            })
         }
     }
 }
