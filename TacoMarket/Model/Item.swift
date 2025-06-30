@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct Item {
+struct Item: Identifiable {
     var type: ItemType
     var count: Int
+    var id = UUID()
     
     init(type: ItemType) {
         self.type = type
@@ -22,3 +23,4 @@ struct Item {
 }
 
 var banana = Item(type: .banana)
+var allItems: [Item] = ItemType.allCases.map { Item(type: $0) }

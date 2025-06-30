@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ItemView: View {
-    var item: Item
+    @Binding var item: Item
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
@@ -45,5 +45,5 @@ struct ItemView: View {
 }
 
 #Preview {
-    ItemView(item: banana)
+    ItemView(item: .constant(banana))
 }

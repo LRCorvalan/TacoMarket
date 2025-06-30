@@ -8,41 +8,40 @@
 import SwiftUI
 
 struct BrowseItemsView: View {
-    private var itemTypes = ItemType.allCases
+    @Binding var allItems: [Item]
     @State private var searchText = ""
-    
-    enum SearchType: String, CaseIterable {
-        case price, availability
-    }
-    
-    @State private var selectedSearchType: SearchType = .price
+    @State private var isPriceSearch = true
     
     var body: some View {
         List {
-            ForEach(searchResults, id: \.self) { itemType in
-                ItemIndex(item: Item(type: itemType))
+            ForEach(searchResults) { item in
+                if let index = allItems.firstIndex(where: { $0.id == item.id }) {
+                    ItemIndex(item: $allItems[index])
+                }
             }
         }
         .searchable(text: $searchText)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Picker("asdf", selection: $selectedSearchType) {
-                    ForEach(SearchType.allCases, id: \.self) {
-                        Text($0.rawValue.capitalized)
-                    }
+                Picker("", selection: $isPriceSearch) {
+                    Text("Price")
+                        .tag(true)
+                    Text("Availability")
+                        .tag(false)
                 }
+                .padding(.horizontal)
                 .pickerStyle(.palette)
             }
         }
     }
     
-    var searchResults: [ItemType] {
-        let sortedItems: [ItemType] = {
-            switch selectedSearchType {
-            case .availability:
-                return itemTypes.sorted { $0.startCount > $1.startCount }
-            case .price:
-                return itemTypes.sorted { $0.price < $1.price }
+    private var searchResults: [Item] {
+        let sortedItems: [Item] = {
+            switch isPriceSearch {
+            case true:
+                return allItems.sorted { $0.priceView < $1.priceView }
+            default:
+                return allItems.sorted { $0.count > $1.count }
             }
         }()
 
@@ -50,8 +49,8 @@ struct BrowseItemsView: View {
             return sortedItems
         } else {
             return sortedItems.filter {
-                $0.name.localizedCaseInsensitiveContains(searchText) ||
-                $0.description.localizedCaseInsensitiveContains(searchText)
+                $0.type.name.localizedCaseInsensitiveContains(searchText) ||
+                $0.type.description.localizedCaseInsensitiveContains(searchText)
             }
         }
     }
@@ -59,6 +58,6 @@ struct BrowseItemsView: View {
 
 #Preview {
     NavigationStack {
-        BrowseItemsView()
+        BrowseItemsView(allItems: .constant(allItems))
     }
 }

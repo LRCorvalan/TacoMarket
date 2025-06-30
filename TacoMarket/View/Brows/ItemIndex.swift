@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ItemIndex: View {
-    var item: Item
+    @Binding var item: Item
     
     var body: some View {
         NavigationLink {
-            ItemView(item: item)
+            ItemView(item: $item)
         } label: {
             HStack(spacing: 40) {
                 Image(item.type.rawValue)
@@ -33,5 +33,5 @@ struct ItemIndex: View {
 }
 
 #Preview {
-    ItemIndex(item: Item(type: .toiletPaper))
+    ItemIndex(item: .constant(banana))
 }
