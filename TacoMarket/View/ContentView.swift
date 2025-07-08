@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var allItems: [Item]
+    
     var body: some View {
-        VStack {
-            Text("Let's start Taco Market!")
+        TabView {
+            BrowseItemsView(allItems: $allItems)
+                .tabItem {
+                    Image(systemName: "storefront.fill")
+                    Text("Browse")
+                }
+            
+            Circle()
+                .tabItem {
+                    Image(systemName: "wallet.bifold.fill")
+                    Text("Pay")
+                }
+            
+            Circle()
+                .tabItem {
+                    Image(systemName: "clock")
+                    Text("History")
+                }
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(allItems: .constant(allItems))
 }

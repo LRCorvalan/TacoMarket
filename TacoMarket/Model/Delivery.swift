@@ -8,6 +8,16 @@
 import Foundation
 
 struct Delivery {
-    var oneDayDelivery = false
-    var twoDayDelivery = false
+    private var oneDayDelivery = false
+    private var twoDayDelivery = false
+    
+    mutating func oneDayDeliveryOn() {
+        oneDayDelivery = true
+        twoDayDelivery = false
+    }
+    
+    mutating func twoDayDeliveryOn() {
+        oneDayDelivery = false
+        twoDayDelivery = true
+    }
 }

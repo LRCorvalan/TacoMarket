@@ -13,24 +13,26 @@ struct BrowseItemsView: View {
     @State private var isPriceSearch = true
     
     var body: some View {
-        List {
-            ForEach(searchResults) { item in
-                if let index = allItems.firstIndex(where: { $0.id == item.id }) {
-                    ItemIndex(item: $allItems[index])
+        NavigationStack {
+            List {
+                ForEach(searchResults) { item in
+                    if let index = allItems.firstIndex(where: { $0.id == item.id }) {
+                        ItemIndex(item: $allItems[index])
+                    }
                 }
             }
-        }
-        .searchable(text: $searchText)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Picker("", selection: $isPriceSearch) {
-                    Text("Price")
-                        .tag(true)
-                    Text("Availability")
-                        .tag(false)
+            .searchable(text: $searchText)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Picker("", selection: $isPriceSearch) {
+                        Text("Price")
+                            .tag(true)
+                        Text("Availability")
+                            .tag(false)
+                    }
+                    .padding(.horizontal)
+                    .pickerStyle(.palette)
                 }
-                .padding(.horizontal)
-                .pickerStyle(.palette)
             }
         }
     }
@@ -44,7 +46,7 @@ struct BrowseItemsView: View {
                 return allItems.sorted { $0.count > $1.count }
             }
         }()
-
+        
         if searchText.isEmpty {
             return sortedItems
         } else {
@@ -57,7 +59,5 @@ struct BrowseItemsView: View {
 }
 
 #Preview {
-    NavigationStack {
-        BrowseItemsView(allItems: .constant(allItems))
-    }
+    BrowseItemsView(allItems: .constant(allItems))
 }

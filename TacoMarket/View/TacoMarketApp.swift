@@ -13,7 +13,7 @@ struct TacoMarketApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(allItems: $allItems)
         }
     }
 }

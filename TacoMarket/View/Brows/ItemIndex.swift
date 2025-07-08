@@ -19,6 +19,7 @@ struct ItemIndex: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                 
                 VStack(alignment: .leading) {
                     Text(item.type.name)
