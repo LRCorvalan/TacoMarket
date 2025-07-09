@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
-struct Item: Identifiable {
+@Model
+class Item: Identifiable {
     var type: ItemType
     var count: Int
-    var id = UUID()
+    var id: UUID
     
     init(type: ItemType) {
         self.type = type
         self.count = type.startCount
+        self.id = UUID()
     }
     
     var priceView: String {

@@ -6,13 +6,29 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Order {
-    let discountCode = "LetsGoMexico!"
-    var tryDiscountCode = ""
-    var items: [Item] = []
-    var delivery: Delivery
+@Model
+class Order {
+    @Relationship(inverse: \Account.orders)
+    var account: Account
+    
+    @Relationship(deleteRule: .nullify)
+    var items: [Item]
+    
+    var discountCode: String
+    var tryDiscountCode: String
+    var delivery: DeliveryType
     var date: Date
+    
+    init(account: Account, tryDiscountCode: String = "", delivery: DeliveryType, date: Date) {
+        self.account = account
+        self.discountCode = "LetsGoMexico!"
+        self.tryDiscountCode = ""
+        self.items = []
+        self.delivery = delivery
+        self.date = date
+    }
     
     var totalPrice: Double {
         var totalPrice = 0.0

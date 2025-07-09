@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ItemType: String, CaseIterable {
+enum ItemType: String, Codable, CaseIterable {
     case banana, eggs, toiletPaper, milk
     case bacon, chicken, taco, tortillas
     case avocado, cheese, lettuce, tomatoes
