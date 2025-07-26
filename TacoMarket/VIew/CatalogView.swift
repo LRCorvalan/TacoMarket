@@ -13,6 +13,7 @@ struct CatalogView: View {
     @EnvironmentObject var cart: CartManager
     @State private var searchText = ""
     @State private var sortOption: SortOption = .priceAsc
+    let auth: AuthViewModel
     
     enum SortOption: String, CaseIterable, Identifiable {
         case priceAsc = "Price ↑"
@@ -23,6 +24,10 @@ struct CatalogView: View {
     
     var body: some View {
         VStack {
+            if let user = auth.currentUser {
+                Text(user.email)
+                    .font(.title3)
+            }
             HStack {
                 TextField("Search...", text: $searchText)
                     .textFieldStyle(.roundedBorder)
@@ -43,8 +48,15 @@ struct CatalogView: View {
                     .environmentObject(cart)
             }
         }
+        .navigationTitle("Taco Market")
         .onAppear(perform: seedItemsIfNeeded)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Logout") {
+                    auth.logout()
+                }
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: CartView()) {
                     Image(systemName: "cart")

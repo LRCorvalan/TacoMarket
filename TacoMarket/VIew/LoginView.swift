@@ -32,8 +32,15 @@ struct LoginView: View {
                     .font(.caption)
             }
             
+            Image("TacoLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .cornerRadius(50)
+            
             Spacer()
             NavigationLink("Don't have an account? Register", destination: RegisterView())
+            NavigationLink("See Users", destination: UserListView())
         }
         .padding()
         .onAppear {

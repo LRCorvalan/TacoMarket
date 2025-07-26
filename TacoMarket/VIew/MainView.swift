@@ -17,26 +17,10 @@ struct MainView: View {
         NavigationView {
             Group {
                 if auth.isLoggedIn {
-                    CatalogView()
+                    CatalogView(auth: auth)
                         .environmentObject(cart)
                 } else {
                     LoginView()
-                }
-            }
-            .navigationTitle("Taco Market - \(auth.currentUser?.email ?? "")")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Logout") {
-                        auth.logout()
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        UserListView()
-                    } label: {
-                        Image(systemName: "person.3.fill")
-                    }
                 }
             }
         }
