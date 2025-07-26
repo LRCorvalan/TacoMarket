@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct TacoMarketApp: App {
-    @State private var allItems: [Item] = ItemType.allCases.map { Item(type: $0) }
-    
     var body: some Scene {
         WindowGroup {
-            ContentView(allItems: $allItems)
+//            ContentView(allItems: $allItems)
+            Circle()
         }
+        .modelContainer(for: [Account.self, Order.self, Item.self])
     }
 }
