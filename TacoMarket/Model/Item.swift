@@ -28,7 +28,8 @@ class Item: Identifiable {
         self.isAvailable = isAvailable
     }
 }
-
+// test Item
+//Item(name: "TestName", details: "TestItem", "1.00"),
 let allItems = [
     Item(name: "Avocado", details: "Fruit", price: 1.50),
     Item(name: "Bacon", details: "Meat", price: 4.99),
