@@ -3,7 +3,7 @@
 //  TacoMarketTest
 //
 //  Created by Luis Corvalan on 7/26/25.
-//
+//  TestItem added - Mark F. 
 
 import Foundation
 import SwiftData
@@ -28,7 +28,8 @@ class Item: Identifiable {
         self.isAvailable = isAvailable
     }
 }
-
+// test Item
+//Item(name: "TestName", details: "TestItem", "1.00"),
 let allItems = [
     Item(name: "Avocado", details: "Fruit", price: 1.50),
     Item(name: "Bacon", details: "Meat", price: 4.99),
